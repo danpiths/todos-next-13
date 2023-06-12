@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const res: { id: string } = await request.json();
+  const req: { id: string } = await request.json();
 
-  await db.delete(categories).where(eq(categories.nanoid, res.id));
+  await db.delete(categories).where(eq(categories.nanoid, req.id));
 
   revalidateTag("user-categories");
 

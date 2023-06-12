@@ -17,11 +17,11 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const res: { name: string } = await request.json();
+  const req: { name: string } = await request.json();
 
   await db
     .insert(categories)
-    .values({ name: res.name, userId, nanoid: nanoid() });
+    .values({ name: req.name, userId, nanoid: nanoid() });
 
   revalidateTag("user-categories");
 
