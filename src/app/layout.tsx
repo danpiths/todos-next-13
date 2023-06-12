@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "../../components/Footer";
+import { Toaster } from "@/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <Header />
           <div className="flex flex-1 flex-col px-5">{children}</div>
           <Footer />
+          <Toaster />
         </body>
       </ClerkProvider>
     </html>
