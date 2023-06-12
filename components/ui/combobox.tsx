@@ -26,7 +26,7 @@ export function Combobox({
   typeofOptions: string;
 }) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState<string | number>("");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -59,8 +59,13 @@ export function Combobox({
               options.map((option) => (
                 <CommandItem
                   key={option.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                  onSelect={(currentLabel) => {
+                    const currentValue = options.find(
+                      (option) => option.label === currentLabel
+                    )?.value;
+                    if (currentValue) {
+                      setValue(currentValue === value ? "" : currentValue);
+                    }
                     setOpen(false);
                   }}
                 >
