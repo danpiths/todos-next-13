@@ -13,28 +13,25 @@ export default function Header() {
         <Link href="/">Todos App</Link>
       </Button>
       {userId ? (
-        <div className="flex items-center gap-2">
-          <UserButton
-            appearance={{
+        <UserButton
+          appearance={{
+            baseTheme: dark,
+            userProfile: {
               baseTheme: dark,
-              userProfile: {
-                baseTheme: dark,
-                variables: {
-                  borderRadius: "7px",
-                  colorPrimary: "#F8FAFC",
-                },
-              },
               variables: {
                 borderRadius: "7px",
                 colorPrimary: "#F8FAFC",
-                colorText: "#E6E6E6",
-                colorBackground: "#101014",
               },
-            }}
-            afterSignOutUrl="/"
-          />
-          <Menu className="h-7 w-7" />
-        </div>
+            },
+            variables: {
+              borderRadius: "7px",
+              colorPrimary: "#F8FAFC",
+              colorText: "#E6E6E6",
+              colorBackground: "#101014",
+            },
+          }}
+          afterSignOutUrl="/"
+        />
       ) : (
         <Button size={"sm"} asChild>
           <Link href="/sign-in">Sign In</Link>
