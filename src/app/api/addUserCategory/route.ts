@@ -1,5 +1,6 @@
 export const runtime = "edge";
 
+import { CategoryFormBody } from "@/components/forms/CategoryForm";
 import { db } from "@/db";
 import { categories } from "@/db/schema/Category";
 import { auth } from "@clerk/nextjs";
@@ -17,7 +18,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const req: { name: string } = await request.json();
+  const req: CategoryFormBody = await request.json();
 
   await db
     .insert(categories)

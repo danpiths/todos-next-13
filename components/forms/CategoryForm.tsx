@@ -62,3 +62,5 @@ export default function CategoryForm() {
     </form>
   );
 }
+
+export type CategoryFormBody = { name: string };
