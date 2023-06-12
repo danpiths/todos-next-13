@@ -5,12 +5,14 @@ import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
 import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CategoryForm() {
   const [name, setName] = useState("");
   const [success, setSuccess] = useState(false);
   const { getToken } = useAuth();
+  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -21,7 +23,7 @@ export default function CategoryForm() {
       body: { name },
     });
     setName("");
-    setSuccess(true);
+    router.refresh();
   }
 
   return (
