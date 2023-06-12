@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en" className="dark">
+    <html lang="en" className="dark">
+      <ClerkProvider>
         <body
           className={`flex min-h-[100svh] w-full flex-col ${inter.className}`}
         >
@@ -28,7 +28,7 @@ export default function RootLayout({
           <div className="flex flex-1 flex-col px-5">{children}</div>
           <Footer />
         </body>
-      </html>
-    </ClerkProvider>
+      </ClerkProvider>
+    </html>
   );
 }
