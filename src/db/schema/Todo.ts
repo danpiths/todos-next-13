@@ -15,8 +15,8 @@ export const todos = mysqlTable(
   {
     id: serial("id").primaryKey(),
     nanoid: char("nanoid", { length: 21 }).notNull(),
-    title: varchar("title", { length: 200 }).notNull(),
-    description: text("description"),
+    title: varchar("title", { length: 50 }).notNull(),
+    description: varchar("description", { length: 250 }),
     completed: boolean("completed").default(false),
     categoryId: int("categoryId"),
     userId: char("userId", { length: 32 }).notNull(),
