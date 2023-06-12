@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   }
 
   const userCategories = await db
-    .select({ id: categories.id, name: categories.name })
+    .select({ id: categories.nanoid, name: categories.name })
     .from(categories)
     .where(eq(categories.userId, userId));
 
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
 
 export type UserCategories = {
   data: {
-    id: number;
+    id: string;
     name: string;
   }[];
 };
