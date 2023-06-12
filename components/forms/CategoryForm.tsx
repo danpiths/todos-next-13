@@ -4,26 +4,40 @@ import { clientAuthedFetch } from "@/lib/clientAuthedFetch";
 import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
+import { useToast } from "@/ui/use-toast";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CategoryForm() {
   const [name, setName] = useState("");
-  const [success, setSuccess] = useState(false);
   const { getToken } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const res = await clientAuthedFetch({
-      apiToCall: "/addUserCategory",
-      method: "POST",
-      getToken,
-      body: { name },
-    });
-    setName("");
-    router.refresh();
+    if (name.length <= 0) {
+      toast({
+        title: "Category Required",
+        description: "Please enter a category name",
+        variant: "destructive",
+      });
+    } else {
+      await clientAuthedFetch({
+        apiToCall: "/addUserCategory",
+        method: "POST",
+        getToken,
+        body: { name: name.trim() },
+      });
+      toast({
+        title: "Category Added",
+        description: "You can now use it for your todos",
+        className: "bg-emerald-800 border-0",
+      });
+      setName("");
+      router.refresh();
+    }
   }
 
   return (
@@ -38,7 +52,6 @@ export default function CategoryForm() {
           id="name"
           value={name}
           onChange={(e) => {
-            success && setSuccess(false);
             return setName(e.target.value);
           }}
           placeholder="Office..."
