@@ -160,7 +160,7 @@ export default function TodoForm({
           If no category is selected, it will be assigned to default category
         </Muted>
       </div>
-      <Button type="submit" className="self-end">
+      <Button type="submit" className="self-start">
         Submit
       </Button>
     </form>
