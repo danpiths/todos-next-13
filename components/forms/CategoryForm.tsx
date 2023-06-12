@@ -17,6 +17,7 @@ export default function CategoryForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    e.stopPropagation();
     if (name.length <= 0) {
       toast({
         title: "Category Required",
