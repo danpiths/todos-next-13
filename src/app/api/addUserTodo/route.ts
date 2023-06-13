@@ -20,18 +20,8 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { completed, title, description, category }: TodoFormBody =
+  const { completed, title, description, categoryId }: TodoFormBody =
     await request.json();
-
-  let categoryId: number | null = null;
-
-  if (category) {
-    const res = await db
-      .select({ id: categories.id })
-      .from(categories)
-      .where(eq(categories.nanoid, category));
-    categoryId = res[0].id;
-  }
 
   await db.insert(todos).values({
     nanoid: nanoid(),
@@ -39,7 +29,7 @@ export async function POST(request: NextRequest) {
     description: description ? description : null,
     completed,
     userId,
-    categoryId,
+    categoryId: categoryId ? categoryId : null,
   });
 
   revalidateTag("user-todos");

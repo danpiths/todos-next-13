@@ -33,7 +33,7 @@ export default function TodoForm({
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [completed, setCompleted] = useState<boolean>(false);
-  const [category, setCategory] = useState<string>("");
+  const [categoryId, setCategoryId] = useState<string>("");
 
   const { getToken } = useAuth();
   const { toast } = useToast();
@@ -86,7 +86,7 @@ export default function TodoForm({
         title: title.trim(),
         description: description ? description.trim() : null,
         completed,
-        category: category ? category : null,
+        categoryId: categoryId ? categoryId : null,
       },
     });
     toast({
@@ -96,7 +96,7 @@ export default function TodoForm({
     setTitle("");
     setDescription("");
     setCompleted(false);
-    setCategory("");
+    setCategoryId("");
     router.refresh();
   }
 
@@ -138,8 +138,8 @@ export default function TodoForm({
           <Combobox
             options={comboboxCategories}
             typeofOption="category"
-            value={category}
-            setValue={setCategory}
+            value={categoryId}
+            setValue={setCategoryId}
             deleteOptionFunction={deleteCategory}
           />
           <Dialog>
@@ -171,5 +171,5 @@ export type TodoFormBody = {
   title: string;
   description?: string;
   completed: boolean;
-  category?: string;
+  categoryId?: string;
 };
