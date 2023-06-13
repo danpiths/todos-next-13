@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/nextjs": "^4.19.1",
     "@clerk/themes": "^1.7.5",
+    "@formkit/auto-animate": "1.0.0-beta.6",
     "@planetscale/database": "^1.7.0",
     "@radix-ui/react-collapsible": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.4",
@@ -28,6 +29,7 @@
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",
+    "dayjs": "^1.11.8",
     "dotenv": "^16.1.4",
     "drizzle-orm": "^0.26.5",
     "drizzle-zod": "^0.4.3",
