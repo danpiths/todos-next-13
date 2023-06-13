@@ -82,9 +82,8 @@ export function Combobox({
           <CommandGroup>
             {options.length > 0 ? (
               options.map((option) => (
-                <AlertDialog>
+                <AlertDialog key={option.value}>
                   <CommandItem
-                    key={option.value}
                     onSelect={(currentLabel) => {
                       const currentValue = options.find(
                         (option) => option.label === currentLabel
