@@ -28,23 +28,28 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/ui/alert-dialog";
+import { Loader2 } from "lucide-react";
 
 export function Combobox({
   options,
   typeofOption,
-  deleteOptionFunction,
-  deleteDialogDescription,
-  deleteDialogDescriptionMain,
   value,
   setValue,
+  deleteOption,
 }: {
   options: { label: string; value: string }[];
   typeofOption: string;
-  deleteOptionFunction?: (id: string) => void;
-  deleteDialogDescription?: string;
-  deleteDialogDescriptionMain?: string;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  deleteOption?: {
+    deleteOptionFunction: (id: string) => void;
+    deleteDialogDescription: string;
+    deleteDialogDescriptionMain: string;
+    loading: boolean;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    optionBeingDeleted: string;
+    setOptionBeingDeleted: React.Dispatch<React.SetStateAction<string>>;
+  };
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -98,19 +103,28 @@ export function Combobox({
                     />
                     <div className="flex w-full items-center">
                       <span className="flex-1">{option.label}</span>
-                      {deleteOptionFunction && (
+                      {deleteOption && (
                         <AlertDialogTrigger
                           asChild
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <Button variant="ghost" size="sm">
-                            <Trash className="h-4 w-4" />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            disabled={deleteOption.loading}
+                          >
+                            {deleteOption.loading &&
+                            deleteOption.optionBeingDeleted === option.value ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Trash className="h-4 w-4" />
+                            )}
                           </Button>
                         </AlertDialogTrigger>
                       )}
                     </div>
                   </CommandItem>
-                  {deleteOptionFunction && (
+                  {deleteOption && (
                     <AlertDialogContent className="">
                       <AlertDialogHeader>
                         <AlertDialogTitle>
@@ -118,18 +132,22 @@ export function Combobox({
                           {typeofOption}: {option.label}?
                         </AlertDialogTitle>
                         <AlertDialogDescription>
-                          {deleteDialogDescription}{" "}
+                          {deleteOption.deleteDialogDescription}{" "}
                           <span className="font-bold underline">
-                            {deleteDialogDescriptionMain}
+                            {deleteOption.deleteDialogDescriptionMain}
                           </span>
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
                         <AlertDialogAction
+                          disabled={deleteOption.loading}
                           onClick={(e) => {
                             e.stopPropagation();
-                            return deleteOptionFunction(option.value);
+                            deleteOption.setOptionBeingDeleted(option.value);
+                            return deleteOption.deleteOptionFunction(
+                              option.value
+                            );
                           }}
                         >
                           Continue

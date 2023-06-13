@@ -6,11 +6,14 @@ import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
 import { useToast } from "@/ui/use-toast";
 import { useAuth } from "@clerk/nextjs";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CategoryForm() {
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const { getToken } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
@@ -18,6 +21,7 @@ export default function CategoryForm() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     e.stopPropagation();
+    setLoading(true);
     if (name.length <= 0) {
       toast({
         title: "Category Required",
@@ -37,6 +41,7 @@ export default function CategoryForm() {
         className: "bg-emerald-800 border-0",
       });
       setName("");
+      setLoading(false);
       router.refresh();
     }
   }
@@ -59,7 +64,10 @@ export default function CategoryForm() {
           name="name"
         />
       </div>
-      <Button type="submit">Add Category</Button>
+      <Button type="submit" disabled={loading}>
+        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Add
+        Category
+      </Button>
     </form>
   );
 }

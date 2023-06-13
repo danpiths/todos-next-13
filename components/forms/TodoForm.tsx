@@ -11,7 +11,7 @@ import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
 import { Switch } from "@/ui/switch";
 import { Textarea } from "@/ui/textarea";
-import { Plus } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
 import CategoryForm from "./CategoryForm";
 import { Combobox } from "@/ui/combobox";
 import { Button } from "@/ui/button";
@@ -34,12 +34,17 @@ export default function TodoForm({
   const [description, setDescription] = useState<string>("");
   const [completed, setCompleted] = useState<boolean>(false);
   const [categoryId, setCategoryId] = useState<string>("");
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+  const [deleteCategoryLoading, setDeleteCategoryLoading] =
+    useState<boolean>(false);
+  const [categoryBeingDeleted, setCategoryBeingDeleted] = useState<string>("");
 
   const { getToken } = useAuth();
   const { toast } = useToast();
   const router = useRouter();
 
   async function deleteCategory(id: string) {
+    setDeleteCategoryLoading(true);
     await clientAuthedFetch({
       apiToCall: "/deleteUserCategory",
       method: "POST",
@@ -50,11 +55,13 @@ export default function TodoForm({
       description: "Category deleted successfully",
       className: "bg-emerald-800 border-0",
     });
+    setDeleteCategoryLoading(false);
     router.refresh();
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSubmitLoading(true);
     if (title.length <= 0) {
       toast({
         title: "Title Required",
@@ -97,6 +104,7 @@ export default function TodoForm({
     setDescription("");
     setCompleted(false);
     setCategoryId("");
+    setSubmitLoading(false);
     router.refresh();
   }
 
@@ -140,9 +148,17 @@ export default function TodoForm({
             typeofOption="category"
             value={categoryId}
             setValue={setCategoryId}
-            deleteOptionFunction={deleteCategory}
-            deleteDialogDescription="This action cannot be undone. This will permanently delete your"
-            deleteDialogDescriptionMain="Category and all the Todos related to it."
+            deleteOption={{
+              deleteDialogDescription:
+                "This action cannot be undone. This will permanently delete your",
+              deleteOptionFunction: deleteCategory,
+              deleteDialogDescriptionMain:
+                "Category and all the Todos related to it.",
+              loading: deleteCategoryLoading,
+              setLoading: setDeleteCategoryLoading,
+              optionBeingDeleted: categoryBeingDeleted,
+              setOptionBeingDeleted: setCategoryBeingDeleted,
+            }}
           />
           <Dialog>
             <DialogTrigger asChild>
@@ -162,7 +178,8 @@ export default function TodoForm({
           If no category is selected, it will be assigned to default category
         </Muted>
       </div>
-      <Button type="submit" className="self-start">
+      <Button type="submit" className="self-start" disabled={submitLoading}>
+        {submitLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         Submit
       </Button>
     </form>
