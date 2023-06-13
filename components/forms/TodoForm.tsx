@@ -102,7 +102,7 @@ export default function TodoForm({
 
   return (
     <form
-      className="mt-10 flex flex-col gap-5 rounded-md border p-5"
+      className="mt-2 flex flex-col gap-5 rounded-md border p-5"
       onSubmit={handleSubmit}
     >
       <div className="grid w-full max-w-sm items-center gap-1.5">
