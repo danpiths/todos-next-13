@@ -11,6 +11,8 @@ import { Button } from "@/ui/button";
 import Todos from "../Todos/Todos";
 import { UserTodos } from "@/app/api/(todos)/getUserTodos/route";
 import Todo from "../Todos/Todo";
+import Categories from "../Categories/Categories";
+import Category from "../Categories/Category";
 
 async function getUserCategories() {
   const res = await authedFetch({
@@ -61,11 +63,21 @@ export default async function AuthedHome() {
           <TodoForm comboboxCategories={comboboxCategories} />
         </CollapsibleContent>
       </Collapsible>
-      <Todos className="mt-5 flex flex-col gap-2">
-        {userTodos.map((todo) => (
-          <Todo todo={todo} key={todo.id} />
+      <Categories className="mt-5 flex flex-col gap-10">
+        {userCategories.map((category) => (
+          <Category
+            categoryName={category.name}
+            key={category.id}
+            categoryTodos={userTodos.filter(
+              (todo) => todo.categoryId === category.id
+            )}
+          />
         ))}
-      </Todos>
+        <Category
+          categoryName="Default"
+          categoryTodos={userTodos.filter((todo) => todo.categoryId === null)}
+        />
+      </Categories>
     </div>
   );
 }
