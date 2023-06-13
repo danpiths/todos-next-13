@@ -18,7 +18,7 @@ export const todos = mysqlTable(
     title: varchar("title", { length: 50 }).notNull(),
     description: varchar("description", { length: 250 }),
     completed: boolean("completed").default(false),
-    categoryId: int("categoryId"),
+    categoryId: char("categoryId", { length: 21 }),
     userId: char("userId", { length: 32 }).notNull(),
     createdAt: timestamp("createdAt").defaultNow(),
     updatedAt: timestamp("updatedAt").onUpdateNow().defaultNow(),
