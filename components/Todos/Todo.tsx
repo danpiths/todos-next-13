@@ -17,17 +17,21 @@ dayjs.extend(relativeTime);
 
 export default function Todo({ todo }: { todo: UserTodos["data"][number] }) {
   return (
-    <Card>
+    <Card className="relative">
       <CardHeader>
         <CardTitle
           className={`${
             todo.completed && "text-muted-foreground line-through"
-          } flex items-center justify-between`}
+          }`}
         >
-          <span>{todo.title}</span>
-          <TodoX todoCompleted={todo.completed} todoId={todo.id} />
+          {todo.title}
         </CardTitle>
         <CardDescription>{dayjs(todo.createdAt).fromNow()}</CardDescription>
+        <TodoX
+          todoCompleted={todo.completed}
+          todoId={todo.id}
+          className="absolute right-[0.4rem] top-0 p-2"
+        />
       </CardHeader>
       <CardContent>
         <P
