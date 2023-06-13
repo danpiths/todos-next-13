@@ -1,5 +1,6 @@
 export const runtime = "edge";
 
+import { DeleteCategoryBody } from "@/components/forms/TodoForm";
 import { db } from "@/db";
 import { categories } from "@/db/schema/Category";
 import { auth } from "@clerk/nextjs";
@@ -17,7 +18,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const req: { id: string } = await request.json();
+  const req: DeleteCategoryBody = await request.json();
 
   await db.delete(categories).where(eq(categories.nanoid, req.id));
 

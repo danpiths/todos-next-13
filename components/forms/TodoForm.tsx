@@ -173,3 +173,7 @@ export type TodoFormBody = {
   completed: boolean;
   categoryId?: string;
 };
+
+export type DeleteCategoryBody = {
+  id: string;
+};
