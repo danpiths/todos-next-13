@@ -3,7 +3,7 @@ export const runtime = "edge";
 import { db } from "@/db";
 import { categories } from "@/db/schema/Category";
 import { auth } from "@clerk/nextjs";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -19,7 +19,8 @@ export async function GET(req: NextRequest) {
   const userCategories = await db
     .select({ id: categories.nanoid, name: categories.name })
     .from(categories)
-    .where(eq(categories.userId, userId));
+    .where(eq(categories.userId, userId))
+    .orderBy(desc(categories.id));
 
   return NextResponse.json(
     { data: userCategories },
