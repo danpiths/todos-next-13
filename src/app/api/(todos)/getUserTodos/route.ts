@@ -27,7 +27,7 @@ export async function GET() {
     })
     .from(todos)
     .where(eq(todos.userId, userId))
-    .orderBy(desc(todos.updatedAt));
+    .orderBy(todos.completed, desc(todos.createdAt));
 
   return NextResponse.json(
     { data: userTodos },
