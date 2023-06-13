@@ -141,6 +141,8 @@ export default function TodoForm({
             value={categoryId}
             setValue={setCategoryId}
             deleteOptionFunction={deleteCategory}
+            deleteDialogDescription="This action cannot be undone. This will permanently delete your"
+            deleteDialogDescriptionMain="Category and all the Todos related to it."
           />
           <Dialog>
             <DialogTrigger asChild>
