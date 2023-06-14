@@ -8,9 +8,7 @@ import {
   CollapsibleTrigger,
 } from "@/ui/collapsible";
 import { Button } from "@/ui/button";
-import Todos from "../Todos/Todos";
 import { UserTodos } from "@/app/api/(todos)/getUserTodos/route";
-import Todo from "../Todos/Todo";
 import Categories from "../Categories/Categories";
 import Category from "../Categories/Category";
 
@@ -33,7 +31,6 @@ async function getUserTodos() {
 }
 
 export default async function AuthedHome() {
-  // const { data: userCategories }: UserCategories = await getUserCategories();
   const userCategoriesFetch = getUserCategories();
   const userTodosFetch = getUserTodos();
 
@@ -64,6 +61,10 @@ export default async function AuthedHome() {
         </CollapsibleContent>
       </Collapsible>
       <Categories className="mt-5 flex flex-col gap-10">
+        <Category
+          categoryName="Default"
+          categoryTodos={userTodos.filter((todo) => todo.categoryId === null)}
+        />
         {userCategories.map((category) => (
           <Category
             categoryName={category.name}
@@ -73,10 +74,6 @@ export default async function AuthedHome() {
             )}
           />
         ))}
-        <Category
-          categoryName="Default"
-          categoryTodos={userTodos.filter((todo) => todo.categoryId === null)}
-        />
       </Categories>
     </div>
   );
