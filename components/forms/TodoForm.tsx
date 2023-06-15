@@ -24,11 +24,13 @@ import { Muted } from "@/ui/typography";
 
 export default function TodoForm({
   comboboxCategories,
+  className,
 }: {
   comboboxCategories: {
     value: string;
     label: string;
   }[];
+  className?: string;
 }) {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -110,10 +112,10 @@ export default function TodoForm({
 
   return (
     <form
-      className="mt-2 flex flex-col gap-5 rounded-md border p-5"
+      className={`mt-2 flex flex-col gap-5 rounded-md border p-5 ${className}`}
       onSubmit={handleSubmit}
     >
-      <div className="grid w-full max-w-sm items-center gap-1.5">
+      <div className="grid w-full items-center gap-1.5">
         <Label htmlFor="title">Title</Label>
         <Input
           type="text"
@@ -166,7 +168,7 @@ export default function TodoForm({
                 <Plus />
               </button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="lg:max-w-sm">
               <DialogHeader>
                 <DialogTitle>Add Category</DialogTitle>
               </DialogHeader>

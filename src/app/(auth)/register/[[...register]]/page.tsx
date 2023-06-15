@@ -9,7 +9,7 @@ export default function Page() {
       <SignUp
         appearance={{
           baseTheme: dark,
-          elements: { rootBox: "w-full", card: "w-full" },
+          elements: { rootBox: "w-full lg:w-80", card: "w-full lg:w-80" },
           layout: {
             socialButtonsPlacement: "bottom",
             socialButtonsVariant: "iconButton",

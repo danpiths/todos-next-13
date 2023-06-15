@@ -7,7 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "../../components/Footer";
 import { Toaster } from "@/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "auto" });
 
 export const metadata = {
   title: "Todos App",
@@ -26,7 +26,9 @@ export default function RootLayout({
           className={`flex min-h-[100svh] w-full flex-col ${inter.className}`}
         >
           <Header />
-          <div className="flex flex-1 flex-col px-5">{children}</div>
+          <div className="flex w-full flex-1 flex-col px-5 lg:mx-auto lg:max-w-5xl">
+            {children}
+          </div>
           <Footer />
           <Toaster />
         </body>

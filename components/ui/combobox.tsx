@@ -124,7 +124,7 @@ export function Combobox({
                     </div>
                   </CommandItem>
                   {deleteOption && (
-                    <AlertDialogContent className="">
+                    <AlertDialogContent className="lg:max-w-sm">
                       <AlertDialogHeader>
                         <AlertDialogTitle>
                           Are you absolutely sure you want to delete{" "}

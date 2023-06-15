@@ -48,33 +48,39 @@ export default async function AuthedHome() {
   }));
 
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="mt-5 flex flex-1 flex-col">
       <H1>
         Your <span className="underline underline-offset-4">Todos</span>
       </H1>
-      <Collapsible className="mt-5">
-        <Button asChild variant="secondary">
-          <CollapsibleTrigger>Add a todo</CollapsibleTrigger>
-        </Button>
-        <CollapsibleContent>
-          <TodoForm comboboxCategories={comboboxCategories} />
-        </CollapsibleContent>
-      </Collapsible>
-      <Categories className="mt-5 flex flex-col gap-10">
-        <Category
-          categoryName="Default"
-          categoryTodos={userTodos.filter((todo) => todo.categoryId === null)}
+      <div className="lg:flex lg:gap-10">
+        <Collapsible className="mt-5 lg:hidden">
+          <Button asChild variant="secondary">
+            <CollapsibleTrigger>Add a todo</CollapsibleTrigger>
+          </Button>
+          <CollapsibleContent>
+            <TodoForm comboboxCategories={comboboxCategories} />
+          </CollapsibleContent>
+        </Collapsible>
+        <TodoForm
+          comboboxCategories={comboboxCategories}
+          className="hidden lg:sticky lg:top-24 lg:mt-7 lg:flex lg:max-w-xl lg:self-start"
         />
-        {userCategories.map((category) => (
+        <Categories className="mt-5 flex flex-col gap-10 lg:flex-1">
           <Category
-            categoryName={category.name}
-            key={category.id}
-            categoryTodos={userTodos.filter(
-              (todo) => todo.categoryId === category.id
-            )}
+            categoryName="Default"
+            categoryTodos={userTodos.filter((todo) => todo.categoryId === null)}
           />
-        ))}
-      </Categories>
+          {userCategories.map((category) => (
+            <Category
+              categoryName={category.name}
+              key={category.id}
+              categoryTodos={userTodos.filter(
+                (todo) => todo.categoryId === category.id
+              )}
+            />
+          ))}
+        </Categories>
+      </div>
     </div>
   );
 }

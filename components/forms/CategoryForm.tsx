@@ -47,10 +47,7 @@ export default function CategoryForm() {
   }
 
   return (
-    <form
-      className="mt-5 flex flex-col items-end gap-5"
-      onSubmit={handleSubmit}
-    >
+    <form className="mt-5 flex flex-col gap-5" onSubmit={handleSubmit}>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="name">Name</Label>
         <Input
@@ -64,7 +61,7 @@ export default function CategoryForm() {
           name="name"
         />
       </div>
-      <Button type="submit" disabled={loading}>
+      <Button type="submit" disabled={loading} className="self-end">
         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Add
         Category
       </Button>
