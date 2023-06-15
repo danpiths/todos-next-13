@@ -12,10 +12,33 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import TodoCompledtedSwitch from "./TodoCompledtedSwitch";
 import TodoX from "./TodoX";
+import TodoCombobox from "./TodoCombobox";
+import { authedFetch } from "@/lib/authedFetch";
+import { UserCategories } from "@/app/api/(categories)/getUserCategories/route";
 
 dayjs.extend(relativeTime);
 
-export default function Todo({ todo }: { todo: UserTodos["data"][number] }) {
+async function getUserCategories() {
+  const res = await authedFetch({
+    apiToCall: "getUserCategories",
+    tags: ["user-categories"],
+    method: "GET",
+  });
+  return res.json();
+}
+
+export default async function Todo({
+  todo,
+}: {
+  todo: UserTodos["data"][number];
+}) {
+  const { data: userCategories }: UserCategories = await getUserCategories();
+
+  const comboboxCategories = userCategories.map((category) => ({
+    value: category.id,
+    label: category.name,
+  }));
+
   return (
     <Card className="relative">
       <CardHeader>
@@ -42,8 +65,13 @@ export default function Todo({ todo }: { todo: UserTodos["data"][number] }) {
           {todo.description}
         </P>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-col items-start gap-3 lg:flex-row lg:items-center">
         <TodoCompledtedSwitch todoCompleted={todo.completed} todoId={todo.id} />
+        <TodoCombobox
+          comboboxCategories={comboboxCategories}
+          todoId={todo.id}
+          todoCategory={todo.categoryId}
+        />
       </CardFooter>
     </Card>
   );

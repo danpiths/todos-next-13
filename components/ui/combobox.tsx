@@ -36,6 +36,8 @@ export function Combobox({
   value,
   setValue,
   deleteOption,
+  onChange,
+  loading,
 }: {
   options: { label: string; value: string }[];
   typeofOption: string;
@@ -50,12 +52,23 @@ export function Combobox({
     optionBeingDeleted: string;
     setOptionBeingDeleted: React.Dispatch<React.SetStateAction<string>>;
   };
+  onChange?: ((value: string) => Promise<void>) | undefined;
+  loading?: boolean;
 }) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger
+        asChild
+        disabled={
+          loading
+            ? loading
+            : deleteOption?.loading
+            ? deleteOption.loading
+            : false
+        }
+      >
         <Button
           variant="outline"
           role="combobox"
@@ -84,15 +97,31 @@ export function Combobox({
               options.map((option) => (
                 <AlertDialog key={option.value}>
                   <CommandItem
-                    onSelect={(currentLabel) => {
-                      const currentValue = options.find(
-                        (option) => option.label === currentLabel
-                      )?.value;
-                      if (currentValue) {
-                        setValue(currentValue === value ? "" : currentValue);
-                      }
-                      setOpen(false);
-                    }}
+                    disabled={
+                      loading
+                        ? loading
+                        : deleteOption?.loading
+                        ? deleteOption.loading
+                        : false
+                    }
+                    onSelect={
+                      onChange
+                        ? async (currentLabel) => {
+                            await onChange(currentLabel);
+                            setOpen(false);
+                          }
+                        : (currentLabel) => {
+                            const currentValue = options.find(
+                              (option) => option.label === currentLabel
+                            )?.value;
+                            if (currentValue) {
+                              setValue(
+                                currentValue === value ? "" : currentValue
+                              );
+                            }
+                            setOpen(false);
+                          }
+                    }
                   >
                     <Check
                       className={cn(
