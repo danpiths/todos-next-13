@@ -58,6 +58,7 @@ export default function TodoForm({
       className: "bg-emerald-800 border-0",
     });
     setDeleteCategoryLoading(false);
+    setCategoryId("");
     router.refresh();
   }
 
@@ -105,7 +106,6 @@ export default function TodoForm({
     setTitle("");
     setDescription("");
     setCompleted(false);
-    setCategoryId("");
     setSubmitLoading(false);
     router.refresh();
   }
