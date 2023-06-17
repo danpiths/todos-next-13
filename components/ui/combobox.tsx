@@ -112,7 +112,9 @@ export function Combobox({
                           }
                         : (currentLabel) => {
                             const currentValue = options.find(
-                              (option) => option.label === currentLabel
+                              (option) =>
+                                option.label.toLowerCase() ===
+                                currentLabel.toLowerCase()
                             )?.value;
                             if (currentValue) {
                               setValue(

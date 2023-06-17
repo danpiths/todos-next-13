@@ -30,7 +30,7 @@ export default function TodoCombobox({
   async function handleChange(currentLabel: string) {
     setLoading(true);
     const currentValue = comboboxCategories.find(
-      (category) => category.label === currentLabel
+      (category) => category.label.toLowerCase() === currentLabel.toLowerCase()
     )?.value;
     await clientAuthedFetch({
       apiToCall: "/updateTodoCategory",
