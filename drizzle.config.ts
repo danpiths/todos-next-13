@@ -5,5 +5,5 @@ export default {
   schema: "./src/db/schema/*",
   out: "./drizzle",
   connectionString: process.env.DATABASE_URL,
-  tablesFilter: ["todos_*"],
+  tablesFilter: ["todos-next-13_*"],
 } satisfies Config;
