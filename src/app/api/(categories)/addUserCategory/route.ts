@@ -4,6 +4,7 @@ import { CategoryFormBody } from "@/components/forms/CategoryForm";
 import { db } from "@/db";
 import { categories } from "@/db/schema/Category";
 import { auth } from "@clerk/nextjs";
+import { eq } from "drizzle-orm";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { nanoid } from "nanoid";
 import { revalidateTag } from "next/cache";
@@ -19,6 +20,22 @@ export async function POST(request: NextRequest) {
   }
 
   const req: CategoryFormBody = await request.json();
+
+  const userCategories = await db
+    .select({ name: categories.name })
+    .from(categories)
+    .where(eq(categories.userId, userId));
+
+  if (
+    userCategories.find(
+      (category) => category.name.toLowerCase() === req.name.toLowerCase()
+    )
+  ) {
+    return NextResponse.json(
+      { error: "Category Already Exists" },
+      { status: StatusCodes.CONFLICT, statusText: ReasonPhrases.CONFLICT }
+    );
+  }
 
   await db
     .insert(categories)

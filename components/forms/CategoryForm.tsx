@@ -6,6 +6,7 @@ import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
 import { useToast } from "@/ui/use-toast";
 import { useAuth } from "@clerk/nextjs";
+import { StatusCodes } from "http-status-codes";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -29,12 +30,21 @@ export default function CategoryForm() {
         variant: "destructive",
       });
     } else {
-      await clientAuthedFetch({
+      const res = await clientAuthedFetch({
         apiToCall: "/addUserCategory",
         method: "POST",
         getToken,
         body: { name: name.trim() },
       });
+      if (res.status === StatusCodes.CONFLICT) {
+        setName("");
+        setLoading(false);
+        return toast({
+          title: "Category Already Exists",
+          description: "Please enter a unique category name",
+          variant: "destructive",
+        });
+      }
       toast({
         title: "Category Added",
         description: "You can now use it for your todos",
