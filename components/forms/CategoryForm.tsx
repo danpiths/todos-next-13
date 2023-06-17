@@ -11,7 +11,14 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function CategoryForm() {
+export default function CategoryForm({
+  comboboxCategories,
+}: {
+  comboboxCategories: {
+    value: string;
+    label: string;
+  }[];
+}) {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -24,36 +31,49 @@ export default function CategoryForm() {
     e.stopPropagation();
     setLoading(true);
     if (name.length <= 0) {
-      toast({
+      setLoading(false);
+      return toast({
         title: "Category Required",
         description: "Please enter a category name",
         variant: "destructive",
       });
-    } else {
-      const res = await clientAuthedFetch({
-        apiToCall: "/addUserCategory",
-        method: "POST",
-        getToken,
-        body: { name: name.trim() },
-      });
-      if (res.status === StatusCodes.CONFLICT) {
-        setName("");
-        setLoading(false);
-        return toast({
-          title: "Category Already Exists",
-          description: "Please enter a unique category name",
-          variant: "destructive",
-        });
-      }
-      toast({
-        title: "Category Added",
-        description: "You can now use it for your todos",
-        className: "bg-emerald-800 border-0",
-      });
+    }
+    if (
+      comboboxCategories.find(
+        (category) => category.label.toLowerCase() === name.trim().toLowerCase()
+      )
+    ) {
       setName("");
       setLoading(false);
-      router.refresh();
+      return toast({
+        title: "Category Already Exists",
+        description: "Please enter a unique category name",
+        variant: "destructive",
+      });
     }
+    const res = await clientAuthedFetch({
+      apiToCall: "/addUserCategory",
+      method: "POST",
+      getToken,
+      body: { name: name.trim() },
+    });
+    if (res.status === StatusCodes.CONFLICT) {
+      setName("");
+      setLoading(false);
+      return toast({
+        title: "Category Already Exists",
+        description: "Please enter a unique category name",
+        variant: "destructive",
+      });
+    }
+    toast({
+      title: "Category Added",
+      description: "You can now use it for your todos",
+      className: "bg-emerald-800 border-0",
+    });
+    setName("");
+    setLoading(false);
+    router.refresh();
   }
 
   return (
