@@ -1,12 +1,7 @@
-import {
-  mysqlTable,
-  varchar,
-  timestamp,
-  index,
-  char,
-} from "drizzle-orm/mysql-core";
+import { varchar, timestamp, index, char } from "drizzle-orm/mysql-core";
+import { todosSqlTable } from "../todosSqlTable";
 
-export const users = mysqlTable(
+export const users = todosSqlTable(
   "users",
   {
     id: char("id", { length: 32 }).primaryKey(),

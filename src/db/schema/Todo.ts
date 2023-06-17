@@ -1,16 +1,14 @@
 import {
-  mysqlTable,
   serial,
   varchar,
-  text,
   boolean,
-  int,
   timestamp,
   index,
   char,
 } from "drizzle-orm/mysql-core";
+import { todosSqlTable } from "../todosSqlTable";
 
-export const todos = mysqlTable(
+export const todos = todosSqlTable(
   "todos",
   {
     id: serial("id").primaryKey(),
