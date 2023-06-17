@@ -66,27 +66,27 @@ export default function TodoForm({
     e.preventDefault();
     setSubmitLoading(true);
     if (title.length <= 0) {
-      toast({
+      setSubmitLoading(false);
+      return toast({
         title: "Title Required",
         description: "Please enter a title",
         variant: "destructive",
       });
-      return;
     } else if (title.length > 50) {
-      toast({
+      setSubmitLoading(false);
+      return toast({
         title: "Title Too Long",
         description: "Please enter a shorter title (50 characters max)",
         variant: "destructive",
       });
-      return;
     }
     if (description.length >= 250) {
-      toast({
+      setSubmitLoading(false);
+      return toast({
         title: "Description Too Long",
         description: "Please enter a shorter description (250 characters max)",
         variant: "destructive",
       });
-      return;
     }
     await clientAuthedFetch({
       apiToCall: "/addUserTodo",
@@ -172,7 +172,7 @@ export default function TodoForm({
               <DialogHeader>
                 <DialogTitle>Add Category</DialogTitle>
               </DialogHeader>
-              <CategoryForm />
+              <CategoryForm comboboxCategories={comboboxCategories} />
             </DialogContent>
           </Dialog>
         </div>
