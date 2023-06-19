@@ -40,7 +40,7 @@ export default async function Todo({
   }));
 
   return (
-    <Card className="relative">
+    <Card className="relative first:mt-5 last:mb-3">
       <CardHeader>
         <CardTitle
           className={`${

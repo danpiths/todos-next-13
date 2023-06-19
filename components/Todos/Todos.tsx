@@ -1,5 +1,6 @@
 "use client";
 
+import { CollapsibleContent } from "@/ui/collapsible";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export default function Todos({
@@ -12,8 +13,8 @@ export default function Todos({
   const [parent, enableAnimations] = useAutoAnimate();
 
   return (
-    <div className={className} ref={parent}>
+    <CollapsibleContent className={className} ref={parent}>
       {children}
-    </div>
+    </CollapsibleContent>
   );
 }

@@ -65,7 +65,7 @@ export default async function AuthedHome() {
           comboboxCategories={comboboxCategories}
           className="hidden lg:sticky lg:top-24 lg:mt-7 lg:flex lg:max-w-xl lg:self-start"
         />
-        <Categories className="mt-5 flex flex-col gap-10 lg:flex-1">
+        <Categories className="mt-5 flex flex-col gap-5 lg:flex-1">
           <Category
             categoryName="Default"
             categoryTodos={userTodos.filter((todo) => todo.categoryId === null)}
