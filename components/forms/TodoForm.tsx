@@ -56,7 +56,7 @@ export default function TodoForm({
     toast({
       description: "Category deleted successfully",
       className:
-        "bg-emerald-600 text-primary-foreground dark:bg-emerald-800 dark:text-primary border-0",
+        "bg-[#221411] text-primary-foreground dark:text-primary border-0",
     });
     setDeleteCategoryLoading(false);
     setCategoryId("");

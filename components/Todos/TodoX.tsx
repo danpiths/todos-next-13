@@ -34,7 +34,7 @@ export default function TodoX({
     toast({
       description: "Todo deleted successfully",
       className:
-        "bg-emerald-600 text-primary-foreground dark:bg-emerald-800 dark:text-primary border-0",
+        "bg-[#221411] text-primary-foreground dark:text-primary border-0",
     });
     setLoading(false);
     router.refresh();
@@ -50,7 +50,9 @@ export default function TodoX({
       {loading ? (
         <Loader2 className="h-4 w-4 animate-spin" />
       ) : (
-        <X className={`${todoCompleted && "text-rose-900"}`} />
+        <X
+          className={`${todoCompleted && "text-rose-700 dark:text-rose-500"}`}
+        />
       )}
     </Button>
   );
