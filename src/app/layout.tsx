@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "../../components/Footer";
 import { Toaster } from "@/ui/toaster";
+import { getCurrentScheme } from "@/utils/colorScheme";
 
 const inter = Inter({ subsets: ["latin"], display: "auto" });
 
@@ -14,13 +15,15 @@ export const metadata = {
   description: "Track your todos w/ descriptions",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const scheme = await getCurrentScheme();
+
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={scheme === "dark" ? "dark" : ""}>
       <ClerkProvider>
         <body
           className={`flex min-h-[100svh] w-full flex-col ${inter.className}`}

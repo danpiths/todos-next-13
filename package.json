@@ -30,6 +30,7 @@
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",
+    "cookies-next": "^2.1.2",
     "dayjs": "^1.11.8",
     "dotenv": "^16.1.4",
     "drizzle-orm": "^0.26.5",
