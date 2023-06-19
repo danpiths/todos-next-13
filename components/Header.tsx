@@ -24,7 +24,9 @@ export default async function Header() {
                   baseTheme: scheme === "dark" ? dark : undefined,
                   variables: {
                     borderRadius: "7px",
-                    colorPrimary: "#F8FAFC",
+                    colorPrimary: scheme === "dark" ? "#EED4CD" : "#1F1A19",
+                    colorText: scheme === "dark" ? "#EED4CD" : "#1F1A19",
+                    colorBackground: scheme === "dark" ? "#080808" : "#F2F2F2",
                   },
                 },
                 variables: {
