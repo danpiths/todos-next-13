@@ -55,7 +55,8 @@ export default function TodoForm({
     });
     toast({
       description: "Category deleted successfully",
-      className: "bg-emerald-800 border-0",
+      className:
+        "bg-emerald-600 text-primary-foreground dark:bg-emerald-800 dark:text-primary border-0",
     });
     setDeleteCategoryLoading(false);
     setCategoryId("");
@@ -101,7 +102,8 @@ export default function TodoForm({
     });
     toast({
       description: "Todo Added",
-      className: "bg-emerald-800 border-0",
+      className:
+        "bg-emerald-600 text-primary-foreground dark:bg-emerald-800 dark:text-primary border-0",
     });
     setTitle("");
     setDescription("");

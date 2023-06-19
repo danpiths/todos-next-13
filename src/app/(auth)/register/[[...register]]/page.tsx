@@ -1,14 +1,17 @@
 export const runtime = "edge";
 
+import { getCurrentScheme } from "@/utils/colorScheme";
 import { SignUp } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 
-export default function Page() {
+export default async function Page() {
+  const scheme = await getCurrentScheme();
+
   return (
     <div className="flex flex-1 items-center justify-center">
       <SignUp
         appearance={{
-          baseTheme: dark,
+          baseTheme: scheme === "dark" ? dark : undefined,
           elements: { rootBox: "w-full lg:w-80", card: "w-full lg:w-80" },
           layout: {
             socialButtonsPlacement: "bottom",
@@ -16,7 +19,9 @@ export default function Page() {
           },
           variables: {
             borderRadius: "7px",
-            colorPrimary: "#F8FAFC",
+            colorPrimary: scheme === "dark" ? "#EED4CD" : "#1F1A19",
+            colorText: scheme === "dark" ? "#EED4CD" : "#1F1A19",
+            colorBackground: scheme === "dark" ? "#080808" : "#F2F2F2",
           },
         }}
         afterSignUpUrl="/api/connectUserToDatabase"

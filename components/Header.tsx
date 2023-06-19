@@ -3,9 +3,12 @@ import { Button } from "@/ui/button";
 import Link from "next/link";
 import { dark } from "@clerk/themes";
 import ColorSchemeButton from "./ui/color-scheme-button";
+import { getCurrentScheme } from "@/utils/colorScheme";
 
-export default function Header() {
+export default async function Header() {
   const { userId } = auth();
+  const scheme = await getCurrentScheme();
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="flex w-full items-center justify-between px-5 py-3 lg:mx-auto lg:max-w-5xl">
@@ -16,9 +19,9 @@ export default function Header() {
           {userId ? (
             <UserButton
               appearance={{
-                baseTheme: dark,
+                baseTheme: scheme === "dark" ? dark : undefined,
                 userProfile: {
-                  baseTheme: dark,
+                  baseTheme: scheme === "dark" ? dark : undefined,
                   variables: {
                     borderRadius: "7px",
                     colorPrimary: "#F8FAFC",
@@ -26,9 +29,9 @@ export default function Header() {
                 },
                 variables: {
                   borderRadius: "7px",
-                  colorPrimary: "#F8FAFC",
-                  colorText: "#E6E6E6",
-                  colorBackground: "#101014",
+                  colorPrimary: scheme === "dark" ? "#EED4CD" : "#1F1A19",
+                  colorText: scheme === "dark" ? "#EED4CD" : "#1F1A19",
+                  colorBackground: scheme === "dark" ? "#080808" : "#F2F2F2",
                 },
               }}
               afterSignOutUrl="/"

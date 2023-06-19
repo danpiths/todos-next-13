@@ -25,7 +25,7 @@ export function Toaster() {
               )}
             </div>
             {action}
-            <ToastClose />
+            <ToastClose className="text-primary-foreground dark:text-primary" />
           </Toast>
         );
       })}

@@ -33,7 +33,8 @@ export default function TodoX({
     });
     toast({
       description: "Todo deleted successfully",
-      className: "bg-emerald-800 border-0",
+      className:
+        "bg-emerald-600 text-primary-foreground dark:bg-emerald-800 dark:text-primary border-0",
     });
     setLoading(false);
     router.refresh();
