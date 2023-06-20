@@ -16,6 +16,22 @@ Tech/Libraries Used in the project,
 - [shadcn/ui](https://ui.shadcn.com) component library for components styling that is opinionated but also could be modified as granularly as needed (uses [Radix UI](https://www.radix-ui.com) under the hood)
 - [Zod](https://zod.dev) for env schema validation (used along with [T3 Env](https://env.t3.gg) library for typesafe environment variable handling)
 
+![desktop-light](https://github.com/danpiths/todos-next-13/assets/85949566/eefb178d-5dc9-4639-969c-cb615e97d859)
+
+![desktop-dark](https://github.com/danpiths/todos-next-13/assets/85949566/22d4b26b-0dbf-497b-86c3-4cc6b228a86d)
+
+![todo-desktop-light](https://github.com/danpiths/todos-next-13/assets/85949566/83314390-0cef-4ed0-a32d-7c2cf5d09cba)
+
+![todo-desktop-dark](https://github.com/danpiths/todos-next-13/assets/85949566/4b1530eb-b199-4df6-b56e-de40f9fe5646)
+
+![mobile-light](https://github.com/danpiths/todos-next-13/assets/85949566/31c0143d-5828-489c-bdac-7f9cfa702ecc)
+
+![mobile-dark](https://github.com/danpiths/todos-next-13/assets/85949566/ef7ffd44-aaf9-4802-901a-08c4809c8411)
+
+![todo-mobile-light](https://github.com/danpiths/todos-next-13/assets/85949566/a000859d-80ca-4ff8-b50b-bb66755c4cbe)
+
+![todo-mobile-dark](https://github.com/danpiths/todos-next-13/assets/85949566/81a91494-d98f-4b21-a290-ba9a1d343c35)
+
 ## Run Locally
 
 1. Clone the repository
