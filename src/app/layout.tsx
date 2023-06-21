@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Todos App by danpiths",
     description: "Track your todos w/ descriptions and categorization",
-  }
+  },
 };
 
 export default async function RootLayout({
