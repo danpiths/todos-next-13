@@ -21,7 +21,6 @@ export default async function TodoSignUp() {
           colorBackground: scheme === "dark" ? "#080808" : "#F2F2F2",
         },
       }}
-      afterSignUpUrl="/api/connectUserToDatabase"
     />
   );
 }
