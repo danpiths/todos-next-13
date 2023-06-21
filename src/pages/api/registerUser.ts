@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 import { db } from "@/db";
 import { users } from "@/db/schema/User";
 import { env } from "@/env.mjs";
