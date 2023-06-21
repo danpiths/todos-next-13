@@ -10,7 +10,7 @@ export default async function SignInModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-background/80 backdrop-blur-sm transition-all duration-100 sm:items-center"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm transition-all duration-100"
       onClick={() => {
         router.back();
       }}
