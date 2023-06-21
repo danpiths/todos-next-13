@@ -7,12 +7,17 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "../../components/Footer";
 import { Toaster } from "@/ui/toaster";
 import { getCurrentScheme } from "@/utils/colorScheme";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"], display: "auto" });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Todos App",
-  description: "Track your todos w/ descriptions",
+  description: "Track your todos w/ descriptions and categorization",
+  openGraph: {
+    title: "Todos App by danpiths",
+    description: "Track your todos w/ descriptions and categorization",
+  }
 };
 
 export default async function RootLayout({
