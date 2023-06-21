@@ -7,6 +7,12 @@ import { buffer } from "micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Webhook } from "svix";
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 const secret = env.CLERK_WEBHOOK_USER_CREATED_SECRET;
 
 export default async function handler(
