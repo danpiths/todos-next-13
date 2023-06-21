@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import { Toaster } from "@/ui/toaster";
 import { getCurrentScheme } from "@/utils/colorScheme";
 import { Metadata } from "next";
+import { env } from "@/env.mjs";
 
 const inter = Inter({ subsets: ["latin"], display: "auto" });
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
     title: "Todos App by danpiths",
     description: "Track your todos w/ descriptions and categorization",
   },
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_BASE_URL),
 };
 
 export default async function RootLayout({

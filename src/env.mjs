@@ -16,6 +16,7 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string().min(1),
     NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.string().min(1),
     NEXT_PUBLIC_API_BASE_URL: z.string().url(),
+    NEXT_PUBLIC_APP_BASE_URL: z.string().url(),
   },
   runtimeEnv: {
     DATABASE_HOST: process.env.DATABASE_HOST,
@@ -32,5 +33,6 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:
       process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    NEXT_PUBLIC_APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL,
   },
 });
