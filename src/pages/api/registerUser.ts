@@ -15,24 +15,30 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const payload = (await buffer(req)).toString();
-  const headers = req.headers as Record<string, string>;
-  const wh = new Webhook(secret);
+  if (req.method === "POST") {
+    const payload = (await buffer(req)).toString();
+    const headers = req.headers as Record<string, string>;
+    const wh = new Webhook(secret);
 
-  let evt;
+    let evt;
 
-  try {
-    evt = wh.verify(payload, headers) as WebhookEvent;
-    if (evt.type === "user.created") {
-      await db.insert(users).values({
-        id: evt.data.id,
-        name: `${evt.data.first_name} ${evt.data.last_name}`,
-        email: evt.data.email_addresses[0].email_address,
-      });
+    try {
+      evt = wh.verify(payload, headers) as WebhookEvent;
+      if (evt.type === "user.created") {
+        await db.insert(users).values({
+          id: evt.data.id,
+          name: `${evt.data.first_name} ${evt.data.last_name}`,
+          email: evt.data.email_addresses[0].email_address,
+        });
+      }
+    } catch (error) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ error: "Unauthorized, could not verify token" });
     }
-  } catch (error) {
+  } else {
     return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ error: "Unauthorized, could not verify token" });
+      .status(StatusCodes.METHOD_NOT_ALLOWED)
+      .json({ error: "Method not allowed" });
   }
 }
