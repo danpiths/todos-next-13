@@ -17,8 +17,10 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
+  authModal,
 }: {
   children: React.ReactNode;
+  authModal: React.ReactNode;
 }) {
   const scheme = await getCurrentScheme();
 
@@ -30,6 +32,7 @@ export default async function RootLayout({
         >
           <Header />
           <div className="flex w-full flex-1 flex-col px-5 lg:mx-auto lg:max-w-5xl">
+            {authModal}
             {children}
           </div>
           <Footer />
