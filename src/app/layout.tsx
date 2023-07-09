@@ -46,3 +46,5 @@ export default async function RootLayout({
     </html>
   );
 }
+
+export { reportWebVitals } from 'next-axiom';
